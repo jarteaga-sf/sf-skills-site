@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SF Skills
 
-## Getting Started
+A browsable library of AI coding skills for Salesforce Lightning Web Component development. Skills teach your AI coding tool (Claude Code, Cursor, Windsurf) how to build Salesforce components the right way — correct SLDS 2 patterns, accessibility, theming, and best practices — installed in one command.
 
-First, run the development server:
+![SF Skills site screenshot](public/screenshot.png)
+
+## What it does
+
+- Browse and search 12+ LWC skills by category
+- One-line install command to add skills to any project
+- Detailed skill pages with usage examples and install instructions
+- Works with Claude Code, Cursor, and Windsurf
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org) (App Router, static export)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com) components
+- Markdown-based skill content via [gray-matter](https://github.com/jonschlinkert/gray-matter)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Adding a skill
 
-To learn more about Next.js, take a look at the following resources:
+Create a new folder under `content/skills/<skill-name>/` with a `SKILL.md` file. The frontmatter fields are:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```markdown
+---
+title: My Skill
+description: Short description shown on the card
+category: Look & Feel
+icon: Palette
+install: claude skills add my-skill
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# My Skill
 
-## Deploy on Vercel
+Full skill documentation here...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## CI / Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub Actions runs lint and build on every push to `main`. The site is deployed on [Vercel](https://vercel.com) with zero configuration — just import the repo.
