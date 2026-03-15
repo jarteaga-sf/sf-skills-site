@@ -119,13 +119,66 @@
   .terminal-window {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
+  .collapsible-section > summary {
+    list-style: none;
+  }
   .collapsible-section[open] > summary svg {
     transform: rotate(90deg);
   }
   .collapsible-section > summary::-webkit-details-marker {
     display: none;
   }
+  .collapsible-section > summary::marker {
+    display: none;
+    content: "";
+  }
+  .collapsible-section > summary:hover {
+    color: #1B96FF;
+  }
   .diagram-block {
     border-left: 2px solid rgba(27, 150, 255, 0.25);
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Syntax highlighting */
+  .code-keyword { color: #c792ea; }
+  .code-string { color: #c3e88d; }
+  .code-comment { color: #546e7a; font-style: italic; }
+  .code-tag { color: #f07178; }
+  .code-attr { color: #ffcb6b; }
+  .code-number { color: #f78c6c; }
+
+  /* Subtle fade-up entrance */
+  .fade-up {
+    animation: fadeUp 0.6s ease-out both;
+  }
+  .fade-up-delay-1 { animation-delay: 0.1s; }
+  .fade-up-delay-2 { animation-delay: 0.2s; }
+  .fade-up-delay-3 { animation-delay: 0.3s; }
+  .fade-up-delay-4 { animation-delay: 0.4s; }
+
+  /* Card lift on hover */
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

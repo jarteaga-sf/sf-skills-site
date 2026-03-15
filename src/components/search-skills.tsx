@@ -42,12 +42,12 @@ export function SearchSkills({ skills, categories }: Props) {
   return (
     <div>
       {/* Header row: title + search on same line */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="text-lg font-semibold tracking-tight text-foreground">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
             What&apos;s included
           </h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
+          <p className="text-sm text-muted-foreground mt-1">
             {filtered.length} skill{filtered.length !== 1 ? "s" : ""}
             {query || activeCategory ? " found" : ""}
           </p>
@@ -78,11 +78,11 @@ export function SearchSkills({ skills, categories }: Props) {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-1.5 mb-5">
+      <div className="flex flex-wrap gap-2 mb-6">
         <button
           onClick={() => setActiveCategory(null)}
           aria-pressed={!activeCategory}
-          className={`px-2.5 py-1 rounded-full text-xs border transition-colors cursor-pointer ${
+          className={`px-3 py-1 rounded-full text-sm border transition-colors cursor-pointer ${
             !activeCategory
               ? "bg-sf-cloud/15 text-sf-cloud border-sf-cloud/30"
               : "text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
@@ -99,7 +99,7 @@ export function SearchSkills({ skills, categories }: Props) {
               )
             }
             aria-pressed={activeCategory === cat.id}
-            className={`px-2.5 py-1 rounded-full text-xs border transition-colors cursor-pointer ${
+            className={`px-3 py-1 rounded-full text-sm border transition-colors cursor-pointer ${
               activeCategory === cat.id
                 ? "bg-sf-cloud/15 text-sf-cloud border-sf-cloud/30"
                 : "text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
@@ -111,7 +111,7 @@ export function SearchSkills({ skills, categories }: Props) {
       </div>
 
       {/* Card grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((skill, i) => (
           <div
             key={skill.slug}

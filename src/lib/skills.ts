@@ -15,6 +15,7 @@ export interface Skill {
   version?: string;
   content: string;
   sections: string[];
+  highlights: string[];
 }
 
 // Plain-language names and summaries for non-developers
@@ -107,10 +108,40 @@ const CATEGORY_MAP: Record<string, { category: string; label: string }> = {
 
 const SKILLS_DIR = path.join(process.cwd(), "content", "skills");
 
+const HIDDEN_SECTION_NAMES = /^(Scoring Rubric|Scoring Guide|Cross-Skill Integration|Dependencies|Anti-Patterns)/i;
+
+function extractHighlights(content: string): string[] {
+  const lines = content.split("\n");
+  let inSection = false;
+  const highlights: string[] = [];
+
+  for (const line of lines) {
+    const h2Match = line.match(/^## (.+)$/);
+    if (h2Match) {
+      if (/^(Core Rules|Core Principles|Key Principles)$/i.test(h2Match[1])) {
+        inSection = true;
+        continue;
+      } else if (inSection) {
+        break;
+      }
+    }
+    if (inSection) {
+      const itemMatch = line.match(/^\d+\.\s+\*\*(.+?)\*\*/);
+      if (itemMatch) {
+        highlights.push(itemMatch[1]);
+      }
+    }
+  }
+
+  return highlights.slice(0, 5);
+}
+
 function extractSections(content: string): string[] {
   const matches = content.match(/^## (.+)$/gm);
   if (!matches) return [];
-  return matches.map((m) => m.replace(/^## /, ""));
+  return matches
+    .map((m) => m.replace(/^## /, ""))
+    .filter((s) => !HIDDEN_SECTION_NAMES.test(s));
 }
 
 export function getAllSkills(): Skill[] {
@@ -149,6 +180,7 @@ export function getAllSkills(): Skill[] {
         version: data.metadata?.version,
         content,
         sections: extractSections(content),
+        highlights: extractHighlights(content),
       } as Skill;
     })
     .filter(Boolean) as Skill[];

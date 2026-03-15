@@ -43,7 +43,7 @@ export function TableOfContents({ sections, mobile }: Props) {
         key={id}
         href={`#${id}`}
         onClick={() => setIsOpen(false)}
-        className={`block text-[13px] leading-snug py-1.5 border-l-2 pl-3 transition-colors ${
+        className={`block text-sm leading-snug py-2 border-l-2 pl-3 transition-colors ${
           activeId === id
             ? "border-sf-cloud text-sf-cloud"
             : "border-transparent text-muted-foreground hover:text-foreground hover:border-foreground/30"
@@ -76,8 +76,8 @@ export function TableOfContents({ sections, mobile }: Props) {
   }
 
   return (
-    <nav className="sticky top-20">
-      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
+    <nav>
+      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">
         Sections
       </p>
       {links}
